@@ -38,7 +38,7 @@ def get_mirea():
         f = t[-1].strip()
         if "общий" in f:
             forma = "Б"
-        elif "без ви" in f:
+        elif "без ви" in f.lower():
             forma = "БВИ"
         elif "особ" in f:
             forma = "О"

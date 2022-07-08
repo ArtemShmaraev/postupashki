@@ -22,7 +22,7 @@ def main():
     spisok.extend(get_mirea())
     in_BD(spisok)
     print("Все базы загружены, выберите вуз и направление: ")
-    app.run()
+    app.run(port=8080)
 
 
 
@@ -42,7 +42,7 @@ def index():
         worksheet.write(0, 3, "Аттестат")
         row = 1
         for user in db_sess.query(User).all():
-            if f"{vuz} | {nupravlenie} |" in user.podal and user.forma == "Б" or user.forma == "БВИ":
+            if f"{vuz} | {nupravlenie} | Б".lower() in user.podal.lower():
                 worksheet.write(row, 0, str(user.snils))
                 s = user.podal.split("$")
                 for i in range(len(s)):
