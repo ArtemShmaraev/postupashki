@@ -1,10 +1,11 @@
 from data import db_session
 from mirea import get_mirea
+from hse import get_hse
 from data.user import User
 import xlsxwriter
 from inBD import in_BD
 from datetime import datetime as dt
-from flask import Flask, render_template, redirect, make_response, jsonify, request
+from flask import Flask, render_template
 from random import randint
 from data.form import Form
 from flask_ngrok import run_with_ngrok
@@ -20,6 +21,7 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 def main():
     spisok = []
     spisok.extend(get_mirea())
+    spisok.extend(get_hse())
     in_BD(spisok)
     print("Все базы загружены, выберите вуз и направление: ")
     app.run(port=8080)
@@ -48,7 +50,7 @@ def index():
                 for i in range(len(s)):
                     t = s[i].split("|")
                     if t[0].lower().strip() == vuz.lower().strip() and t[1].lower().strip() == nupravlenie.lower().strip():
-                        worksheet.write(row, 1, t[3])
+                        worksheet.write(row, 1, int(t[3]))
                 worksheet.write(row, 2, user.sogl)
                 worksheet.write(row, 3, user.vybor)
                 row += 1

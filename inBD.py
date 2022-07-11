@@ -7,8 +7,8 @@ def in_BD(spisok):
     for i in range(len(spisok)):
         snils = spisok[i][0]
         ball = spisok[i][1]
-        sogl = spisok[i][2]
-        vybor = spisok[i][3]
+        sogl = spisok[i][2].lower()
+        vybor = spisok[i][3].lower()
         nup = spisok[i][4]
         vuz = spisok[i][5]
         forma = spisok[i][6]
