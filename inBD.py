@@ -16,20 +16,20 @@ def in_BD(spisok):
         user = db_sess.query(User).filter(User.snils == snils).first()
         if user:
             if (f"{vuz} | {nup} | {forma}".lower()) not in user.podal.lower():
-                user.podal += f" {vuz} | {nup} | {forma} | {ball}$"
+                user.podal += f" {vuz} | {nup} | {forma} | {ball} $"
 
-            if vybor == "да" and (f" {vuz} | {nup} | {forma} | {ball}$".lower()) not in user.vybor.lower():
-                user.vybor += f" {vuz} | {nup} | {forma} | {ball}$"
-            if sogl == "да" and (f" {vuz} | {nup} | {forma} | {ball}$".lower()) not in user.sogl.lower():
-                user.sogl += f" {vuz} | {nup} | {forma} | {ball}$"
+            if vybor == "да" and (f" {vuz} | {nup} | {forma} | {ball} $".lower()) not in user.vybor.lower():
+                user.vybor += f" {vuz} | {nup} | {forma} | {ball} $"
+            if sogl == "да" and (f" {vuz} | {nup} | {forma} | {ball} $".lower()) not in user.sogl.lower():
+                user.sogl += f" {vuz} | {nup} | {forma} | {ball} $"
 
         else:
             user = User()
             user.snils = snils
-            user.podal = f" {vuz} | {nup} | {forma} | {ball}$"
+            user.podal = f" {vuz} | {nup} | {forma} | {ball} $"
             if vybor == "да":
-                user.vybor = f" {vuz} | {nup} | {forma} | {ball}$"
+                user.vybor = f" {vuz} | {nup} | {forma} | {ball} $"
             if sogl == "да":
-                user.sogl = f" {vuz} | {nup} | {forma} | {ball}$"
+                user.sogl = f" {vuz} | {nup} | {forma} | {ball} $"
             db_sess.add(user)
         db_sess.commit()

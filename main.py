@@ -49,9 +49,14 @@ def index():
                     t = s[i].split("|")
                     if t[0].lower().strip() == vuz.lower().strip() and t[1].lower().strip() == nupravlenie.lower().strip():
                         worksheet.write(row, 1, int(t[3]))
-                worksheet.write(row, 2, user.sogl)
-                worksheet.write(row, 3, user.vybor)
-                worksheet.write(row, 4, user.podal)
+                worksheet.write(row, 2, "\n".join(user.sogl.split("$")))
+                sp = set()
+                t = user.vybor.split("$")
+                for i in range(len(t)):
+                    sp.add(t[i].split("|")[0])
+                sp = "\n".join(list(sp))
+                worksheet.write(row, 3, sp)
+                worksheet.write(row, 4, "\n".join(user.podal.split("$")))
                 row += 1
         workbook.close()
         return render_template(f"post.html", f=f"{name}.xlsx")

@@ -57,7 +57,7 @@ def get_mirea():
         for i in range(len(table)):
             snils = int("".join(re.findall(r'\d+', table[i].find("td", class_="fio").text)))
             if forma == "БВИ":
-                ball = 310
+                ball = 311
             else:
                 ball = int(table[i].find("td", class_="sum").text) + int(table[i].find("td", class_="achievments").text)
             sogl = table[i].find("td", class_="accepted").text

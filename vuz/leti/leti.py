@@ -18,11 +18,10 @@ def get_leti():
 
     spisok = []
     vuz = 'ЛЭТИ'
-    print(len(table))
     for item in table:
         href = "https://abit.etu.ru/" + item.find_all("a")[0].get("href")
         nup = item.text.split('\n')[2]
-        print(vuz, nup)
+        print(vuz, nup, "Б")
         req1 = requests.get(href)
         src1 = req1.text
         soup1 = BeautifulSoup(src1, "lxml")
@@ -45,7 +44,26 @@ def get_leti():
                 forma = 'С'
             if f1 == 'БВИ':
                 forma = 'БВИ'
-                ball = 310
+                ball = 311
+            if f1 == "К":
+                forma = "К"
             spisok.append([snils, ball, sogl, vybor, nup, vuz, forma])
+        try:
+            href = "https://abit.etu.ru/" + item.find_all("a")[1].get("href")
+            nup = item.text.split('\n')[2]
+            print(vuz, nup, "К")
+            req1 = requests.get(href)
+            src1 = req1.text
+            soup1 = BeautifulSoup(src1, "lxml")
+            table1 = soup1.find("div", class_="table-responsive").find_all("tr")[2:]
+            for i in table1:
+                snils = i.find("td", class_="fio").text.replace('-', '').replace(' ', '')
+                ball = i.find("td", class_="ball").text
+                sogl = i.find("td", class_="is-agree").text
+                vybor = i.find("td", class_="is-original").text
+                forma = "K"
+                spisok.append([snils, ball, sogl, vybor, nup, vuz, forma])
+        except Exception:
+            print("Ошибка")
     return spisok
 

@@ -42,7 +42,7 @@ def get_hse():
 
                     if u[2] == "Да":
                         forma = "БВИ"
-                        ball = 310
+                        ball = 311
                     elif u[3] == "Да":
                         forma = "О"
                     elif u[5] == "Да":
