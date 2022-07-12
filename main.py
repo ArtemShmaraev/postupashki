@@ -1,6 +1,7 @@
 from data import db_session
 from vuz.mirea.mirea import get_mirea
 from vuz.hse.hse import get_hse
+from vuz.leti.leti import get_leti
 from data.user import User
 import xlsxwriter
 from inBD import in_BD
@@ -16,10 +17,9 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 #run_with_ngrok(app)
 
 def main():
-    spisok = []
-    #spisok.extend(get_mirea())
-    spisok.extend(get_hse())
-    in_BD(spisok)
+    in_BD(get_mirea())
+    in_BD(get_hse())
+    in_BD(get_leti())
     print("Все базы загружены, выберите вуз и направление: ")
     app.run(port=8080)
 
@@ -39,6 +39,7 @@ def index():
         worksheet.write(0, 1, "Балл")
         worksheet.write(0, 2, "Согласие")
         worksheet.write(0, 3, "Аттестат")
+        worksheet.write(0, 4, "Подал")
         row = 1
         for user in db_sess.query(User).all():
             if f"{vuz} | {nupravlenie} | Б".lower() in user.podal.lower():
@@ -50,6 +51,7 @@ def index():
                         worksheet.write(row, 1, int(t[3]))
                 worksheet.write(row, 2, user.sogl)
                 worksheet.write(row, 3, user.vybor)
+                worksheet.write(row, 4, user.podal)
                 row += 1
         workbook.close()
         return render_template(f"post.html", f=f"{name}.xlsx")
