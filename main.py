@@ -1,15 +1,12 @@
 from data import db_session
-from mirea import get_mirea
-from hse import get_hse
+from vuz.mirea.mirea import get_mirea
+from vuz.hse.hse import get_hse
 from data.user import User
 import xlsxwriter
 from inBD import in_BD
 from datetime import datetime as dt
 from flask import Flask, render_template
-from random import randint
 from data.form import Form
-from flask_ngrok import run_with_ngrok
-
 
 # запуск приложения
 app = Flask(__name__)
@@ -20,7 +17,7 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 def main():
     spisok = []
-    spisok.extend(get_mirea())
+    #spisok.extend(get_mirea())
     spisok.extend(get_hse())
     in_BD(spisok)
     print("Все базы загружены, выберите вуз и направление: ")

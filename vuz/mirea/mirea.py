@@ -13,7 +13,7 @@ def get_mirea():
     vuz = "МИРЭА"
 
 
-    html = open("mirea.html", encoding="utf-8").read()
+    html = open("vuz/mirea/mirea.html", encoding="utf-8").read()
     soup = BeautifulSoup(html, "lxml")
     page = soup.findAll("a", class_="showListingBtn")
     s = []

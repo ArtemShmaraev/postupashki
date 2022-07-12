@@ -8,7 +8,7 @@ import re
 def get_hse():
     spisok = []
     vuz = "ВШЭ"
-    html = open("hse.html", encoding="utf-8").read()
+    html = open("vuz/hse/hse.html", encoding="utf-8").read()
     soup = BeautifulSoup(html, "lxml")
     page = soup.findAll("a")
     s = []
