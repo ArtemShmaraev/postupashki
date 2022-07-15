@@ -2,6 +2,7 @@ from data import db_session
 from vuz.mirea.mirea import get_mirea
 from vuz.hse.hse import get_hse
 from vuz.leti.leti import get_leti
+from vuz.itmo.itmo import get_itmo
 from vuz.guap.guap import get_guap
 from data.user import User
 import xlsxwriter
@@ -23,6 +24,7 @@ def main():
     #in_BD(get_hse("hse_spb"))
     #in_BD(get_hse("hse_nn"))
     #in_BD(get_hse("hse_p"))
+    #in_BD(get_itmo())
     in_BD(get_leti())
     in_BD(get_guap())
     print("Все базы загружены, выберите вуз и направление: ")
