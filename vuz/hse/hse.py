@@ -8,7 +8,7 @@ def get_hse(name):
     spisok = []
     d = {"hse": "ВШЭ", "hse_spb": "ВШЭ СПБ", "hse_nn": "ВШЭ НН", "hse_p": "ВШЭ П"}
     vuz = d[name]
-    html = open(f"vuz/{name}/{name}.html", encoding="utf-8").read()
+    html = open(f"vuz/hse/{name}.html", encoding="utf-8").read()
     soup = BeautifulSoup(html, "lxml")
     page = soup.findAll("td")[2:]
     for i in range(0, len(page), 2):
