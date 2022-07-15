@@ -18,8 +18,8 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 #run_with_ngrok(app)
 
 def main():
-    in_BD(get_mirea())
-    in_BD(get_hse("hse"))
+    #in_BD(get_mirea())
+    #in_BD(get_hse("hse"))
     in_BD(get_hse("hse_spb"))
     in_BD(get_hse("hse_nn"))
     in_BD(get_hse("hse_p"))

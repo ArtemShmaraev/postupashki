@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import re
 
 
 def tohtml(src, file):
@@ -29,7 +30,8 @@ def get_leti():
         table1 = soup1.find("div", class_="table-responsive").find_all("tr")[2:]
 
         for i in table1:
-            snils = i.find("td", class_="fio").text.replace('-', '').replace(' ', '')
+            snils = int("".join(re.findall(r'\d+', i.find("td", class_="fio").text)))
+            #snils = i.find("td", class_="fio").text.replace('-', '').replace(' ', '')
             f1 = i.find("td", class_="group").text
             ball = int(i.find("td", class_="ball").text)
             sogl = i.find("td", class_="is-agree").text

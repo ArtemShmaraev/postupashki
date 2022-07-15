@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-
+import re
 
 def get_guap():
     mainurl = "https://priem.guap.ru/_lists/Pred_37"
@@ -35,7 +35,8 @@ def get_guap():
 
                 for tr in alltr:
                     tds = tr.find_all("td")
-                    snils = tds[0].text.replace('-', '').replace(' ', '')
+                    snils = int("".join(re.findall(r'\d+', tds[0].text)))
+                    #snils = tds[0].text.replace('-', '').replace(' ', '')
                     ball = int(tds[4].text)
                     p = tds[5].text
                     if p == 'Да':
@@ -45,10 +46,7 @@ def get_guap():
                         forma = formadict[alltd.index(j)]
                     sogl = tds[6].text
                     vybor = tds[7].text
-                    try:
-                        if ball > 245:
-                            spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
-                    except Exception:
-                        print("Ошибка")
+                    if ball > 245:
+                        spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
 
     return spisok

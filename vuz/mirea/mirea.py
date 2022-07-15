@@ -7,8 +7,6 @@ import requests
 
 def get_mirea():
     print("Сбор данных МИРЭА")
-    print("Список ссылок в конце форма обучения Б К Ц С О БВИ")
-
     spisok = []
     vuz = "МИРЭА"
 
@@ -16,16 +14,11 @@ def get_mirea():
     html = open("vuz/mirea/mirea.html", encoding="utf-8").read()
     soup = BeautifulSoup(html, "lxml")
     page = soup.findAll("a", class_="showListingBtn")
-    s = []
     for i in range(len(page)):
-        s.append(page[i].get("href"))
-
-    for i in range(len(s)):
-        url = "https://priem.mirea.ru/accepted-entrants-list/" + s[i]
+        url = "https://priem.mirea.ru/accepted-entrants-list/" + page[i].get("href")
         r = requests.get(url)  # url - ссылка
         html = r.text
         soup = BeautifulSoup(html, "lxml")
-
 
         # получаю направление и факультет
         page = soup.find("p", class_='namesListPlan')
