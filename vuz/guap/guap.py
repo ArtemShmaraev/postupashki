@@ -36,7 +36,6 @@ def get_guap():
                 for tr in alltr:
                     tds = tr.find_all("td")
                     snils = int("".join(re.findall(r'\d+', tds[0].text)))
-                    #snils = tds[0].text.replace('-', '').replace(' ', '')
                     ball = int(tds[4].text)
                     p = tds[5].text
                     if p == 'Да':

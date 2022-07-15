@@ -9,13 +9,12 @@ def get_mirea():
     print("Сбор данных МИРЭА")
     spisok = []
     vuz = "МИРЭА"
-
-
     html = open("vuz/mirea/mirea.html", encoding="utf-8").read()
     soup = BeautifulSoup(html, "lxml")
-    page = soup.findAll("a", class_="showListingBtn")
-    for i in range(len(page)):
-        url = "https://priem.mirea.ru/accepted-entrants-list/" + page[i].get("href")
+    pag = soup.findAll("a", class_="showListingBtn")
+
+    for j in range(len(pag)):
+        url = "https://priem.mirea.ru/accepted-entrants-list/" + pag[j].get("href")
         r = requests.get(url)  # url - ссылка
         html = r.text
         soup = BeautifulSoup(html, "lxml")
@@ -43,10 +42,8 @@ def get_mirea():
             continue
         print(vuz, nup, forma)
 
-
         # поиск таблицы, срез для того чтобы убрать первую строку
         table = soup.find("table").findAll("tr")[1:]
-
         for i in range(len(table)):
             snils = int("".join(re.findall(r'\d+', table[i].find("td", class_="fio").text)))
             if forma == "БВИ":

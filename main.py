@@ -20,9 +20,9 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 def main():
     #in_BD(get_mirea())
     #in_BD(get_hse("hse"))
-    in_BD(get_hse("hse_spb"))
-    in_BD(get_hse("hse_nn"))
-    in_BD(get_hse("hse_p"))
+    #in_BD(get_hse("hse_spb"))
+    #in_BD(get_hse("hse_nn"))
+    #in_BD(get_hse("hse_p"))
     in_BD(get_leti())
     in_BD(get_guap())
     print("Все базы загружены, выберите вуз и направление: ")
