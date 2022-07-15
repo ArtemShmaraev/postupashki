@@ -6,7 +6,7 @@ import re
 
 def get_hse(name):
     spisok = []
-    d = {"hse": "ВШЭ", "hse-spb": "ВШЭ СПБ", "hse_nn": "ВШЭ НН", "hse_p": "ВШЭ П"}
+    d = {"hse": "ВШЭ", "hse_spb": "ВШЭ СПБ", "hse_nn": "ВШЭ НН", "hse_p": "ВШЭ П"}
     vuz = d[name]
     html = open(f"vuz/{name}/{name}.html", encoding="utf-8").read()
     soup = BeautifulSoup(html, "lxml")
