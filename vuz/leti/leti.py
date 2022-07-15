@@ -31,7 +31,7 @@ def get_leti():
         for i in table1:
             snils = i.find("td", class_="fio").text.replace('-', '').replace(' ', '')
             f1 = i.find("td", class_="group").text
-            ball = i.find("td", class_="ball").text
+            ball = int(i.find("td", class_="ball").text)
             sogl = i.find("td", class_="is-agree").text
             vybor = i.find("td", class_="is-original").text
             if f1 == 'ОК':
@@ -47,7 +47,8 @@ def get_leti():
                 ball = 311
             if f1 == "К":
                 forma = "К"
-            spisok.append([snils, ball, sogl, vybor, nup, vuz, forma])
+            if ball > 245:
+                spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
         try:
             href = "https://abit.etu.ru/" + item.find_all("a")[1].get("href")
             nup = item.text.split('\n')[2]
@@ -58,11 +59,12 @@ def get_leti():
             table1 = soup1.find("div", class_="table-responsive").find_all("tr")[2:]
             for i in table1:
                 snils = i.find("td", class_="fio").text.replace('-', '').replace(' ', '')
-                ball = i.find("td", class_="ball").text
+                ball = int(i.find("td", class_="ball").text)
                 sogl = i.find("td", class_="is-agree").text
                 vybor = i.find("td", class_="is-original").text
                 forma = "K"
-                spisok.append([snils, ball, sogl, vybor, nup, vuz, forma])
+                if ball > 245:
+                    spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
         except Exception:
             print("Ошибка")
     return spisok

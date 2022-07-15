@@ -16,5 +16,5 @@ class User(SqlAlchemyBase):
     ball = sqlalchemy.Column(sqlalchemy.Integer, default=0)
 
     def __repr__(self):
-        return f'{self.snils} {self.ball} {self.podal}'
+        return f'{self.snils} {self.sogl}'
 

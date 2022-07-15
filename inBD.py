@@ -32,4 +32,6 @@ def in_BD(spisok):
             if sogl == "да":
                 user.sogl = f" {vuz} | {nup} | {forma} | {ball} $"
             db_sess.add(user)
+            #db_sess.commit()
         db_sess.commit()
+    #db_sess.commit()

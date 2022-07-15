@@ -62,6 +62,7 @@ def get_mirea():
                 ball = int(table[i].find("td", class_="sum").text) + int(table[i].find("td", class_="achievments").text)
             sogl = table[i].find("td", class_="accepted").text
             vybor = table[i].find("td", class_="original").text
-            spisok.append([snils, ball, sogl, vybor, nup, vuz, forma])
+            if ball > 245:
+                spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
 
     return spisok

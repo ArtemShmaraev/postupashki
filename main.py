@@ -2,6 +2,7 @@ from data import db_session
 from vuz.mirea.mirea import get_mirea
 from vuz.hse.hse import get_hse
 from vuz.leti.leti import get_leti
+from vuz.guap.guap import get_guap
 from data.user import User
 import xlsxwriter
 from inBD import in_BD
@@ -18,8 +19,12 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 def main():
     in_BD(get_mirea())
-    in_BD(get_hse())
+    in_BD(get_hse("hse"))
+    in_BD(get_hse("hse_spb"))
+    in_BD(get_hse("hse_nn"))
+    in_BD(get_hse("hse_p"))
     in_BD(get_leti())
+    in_BD(get_guap())
     print("Все базы загружены, выберите вуз и направление: ")
     app.run(port=8080)
 
@@ -50,12 +55,12 @@ def index():
                     if t[0].lower().strip() == vuz.lower().strip() and t[1].lower().strip() == nupravlenie.lower().strip():
                         worksheet.write(row, 1, int(t[3]))
                 worksheet.write(row, 2, "\n".join(user.sogl.split("$")))
-                sp = set()
+                s_vybor = set()
                 t = user.vybor.split("$")
                 for i in range(len(t)):
-                    sp.add(t[i].split("|")[0])
-                sp = "\n".join(list(sp))
-                worksheet.write(row, 3, sp)
+                    s_vybor.add(t[i].split("|")[0])
+                s_vybor = "\n".join(list(s_vybor))
+                worksheet.write(row, 3, s_vybor)
                 worksheet.write(row, 4, "\n".join(user.podal.split("$")))
                 row += 1
         workbook.close()
