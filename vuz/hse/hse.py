@@ -42,6 +42,8 @@ def get_hse(name):
                     sogl = u[-4]
                     if ball > 245:
                         spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
+                    else:
+                        break
                 except Exception:
                     print("Ошибка")
     return spisok

@@ -36,7 +36,9 @@ def get_guap():
                 for tr in alltr:
                     tds = tr.find_all("td")
                     snils = int("".join(re.findall(r'\d+', tds[0].text)))
-                    ball = int(tds[4].text)
+                    ball = tds[4].text
+                    if ball == "Без В/И":
+                        ball = 311
                     p = tds[5].text
                     if p == 'Да':
                         forma = 'БВИ'
@@ -45,7 +47,7 @@ def get_guap():
                         forma = formadict[alltd.index(j)]
                     sogl = tds[6].text
                     vybor = tds[7].text
-                    if ball > 245:
-                        spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
+                    if int(ball) > 245:
+                        spisok.append([int(snils), int(ball), sogl, vybor, nup, vuz, forma])
 
     return spisok

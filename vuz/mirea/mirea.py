@@ -54,5 +54,7 @@ def get_mirea():
             vybor = table[i].find("td", class_="original").text
             if ball > 245:
                 spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
+            else:
+                break
 
     return spisok

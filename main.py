@@ -1,22 +1,26 @@
 from data import db_session
-from vuz.mirea.mirea import get_mirea
-from vuz.hse.hse import get_hse
-from vuz.leti.leti import get_leti
-from vuz.itmo.itmo import get_itmo
-from vuz.guap.guap import get_guap
 from data.user import User
 import xlsxwriter
 from inBD import in_BD
 from datetime import datetime as dt
 from flask import Flask, render_template
 from data.form import Form
+from flask_ngrok import run_with_ngrok
+
+from vuz.mirea.mirea import get_mirea
+from vuz.hse.hse import get_hse
+from vuz.leti.leti import get_leti
+from vuz.itmo.itmo import get_itmo
+from vuz.mtusi.mtusi import get_mtusi
+from vuz.spbgu.spbgu import get_spbgu
+from vuz.guap.guap import get_guap
 
 # запуск приложения
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
-#run_with_ngrok(app)
+run_with_ngrok(app)
 
 def main():
     #in_BD(get_mirea())
@@ -25,10 +29,12 @@ def main():
     #in_BD(get_hse("hse_nn"))
     #in_BD(get_hse("hse_p"))
     #in_BD(get_itmo())
-    in_BD(get_leti())
-    in_BD(get_guap())
+    #in_BD(get_leti())
+    #in_BD(get_spbgu())
+    #in_BD(get_guap())
+    #in_BD(get_mtusi())
     print("Все базы загружены, выберите вуз и направление: ")
-    app.run(port=8080)
+    app.run()
 
 
 
@@ -37,7 +43,7 @@ def index():
     form = Form()
     if form.validate_on_submit():
         vuz = form.vuz.data
-        nupravlenie = form.nup.data
+        nupravlenie = form.nup.data.replace(".", "")
         db_sess = db_session.create_session()
         name = f"{vuz}_{nupravlenie}_sp{str(dt.now())[20:26]}"
         workbook = xlsxwriter.Workbook(f'static/{name}.xlsx')
