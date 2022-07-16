@@ -6,7 +6,6 @@ import requests
 
 
 def get_mirea():
-    print("Сбор данных МИРЭА")
     spisok = []
     vuz = "МИРЭА"
     html = open("vuz/mirea/mirea.html", encoding="utf-8").read()
