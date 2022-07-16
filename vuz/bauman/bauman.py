@@ -31,6 +31,8 @@ def get_bauman():
             snils = int("".join(re.findall(r'\d+', row[1])))
             if row[3][:2].isdigit():
                 ball = int("".join(re.findall(r'\d+', row[3])))
+                if forma == "БВИ":
+                    forma = "Б"
             else:
                 ball = 311
                 forma = "БВИ"
@@ -39,3 +41,4 @@ def get_bauman():
             if ball > 245:
                 spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
     return spisok
+
