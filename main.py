@@ -14,6 +14,7 @@ from vuz.itmo.itmo import get_itmo
 from vuz.mtusi.mtusi import get_mtusi
 from vuz.spbgu.spbgu import get_spbgu
 from vuz.guap.guap import get_guap
+from vuz.bauman.bauman import get_bauman
 
 # запуск приложения
 app = Flask(__name__)
@@ -33,6 +34,7 @@ def main():
     #in_BD(get_spbgu())
     #in_BD(get_guap())
     #in_BD(get_mtusi())
+    in_BD(get_bauman())
     print("Все базы загружены, выберите вуз и направление: ")
     app.run()
 

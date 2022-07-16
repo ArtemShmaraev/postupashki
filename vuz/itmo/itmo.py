@@ -38,6 +38,7 @@ def get_itmo():
         s = page[i].get("href").split("/")[1:]
         url = f"https://abitlk.itmo.ru/api/v1/9e2eee80b266b31c8d65f1dd3992fa26eb8b4c118ca9633550889a8ff2cac429/rating/bachelor/budget?program_id={s[3]}"
         js = json.loads(requests.get(url).text)
+        print(url)
         nup = "".join(re.findall(r'\d+', js["result"]['direction']['direction_title']))
         print(vuz, nup)
         spisok.extend(get_spisok(js["result"]['without_entry_tests'], "БВИ", nup))
