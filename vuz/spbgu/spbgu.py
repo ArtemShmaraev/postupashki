@@ -13,8 +13,12 @@ def get_spbgu():
     pag = soup.findAll("a")[1:]
     for i in range(len(pag)):
         url = "https://cabinet.spbu.ru/Lists/1k_EntryLists/" + pag[i].get("href")
-        html = urllib.request.urlopen(url, timeout=10).read().decode('utf-8')
-        #html = requests.get(url).text.encode().decode("utf-8")
+        html = ""
+        while html == "":
+            try:
+                html = urllib.request.urlopen(url).read().decode('utf-8')
+            except Exception:
+                print("повтор")
         soup = BeautifulSoup(html, "lxml")
         n = soup.find("p").text.lower()
         s = n.find("направление")
@@ -29,8 +33,8 @@ def get_spbgu():
         if "договорная" in n:
             forma = "К"
         print(vuz, nup, forma)
-        # if nup[:2] == "39":
-        #     break
+        if nup[:2] == "39":
+            break
 
         table = soup.find_all("tr")[1:]
         for j in range(len(table)):

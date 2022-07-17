@@ -32,9 +32,9 @@ def main():
     # in_BD(get_itmo())
     # in_BD(get_leti())
     in_BD(get_spbgu())
-    # in_BD(get_guap())
-    # in_BD(get_mtusi())
-    # in_BD(get_bauman())
+    in_BD(get_guap())
+    in_BD(get_mtusi())
+    in_BD(get_bauman())
     print("Все базы загружены, выберите вуз и направление: ")
     app.run()
 
