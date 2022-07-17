@@ -94,7 +94,7 @@ def index():
         mesto_t = 1
         in_top = False
         for i in range(len(top)):
-            if snils == top[i][1] or snils >= top[i][0]:
+            if snils == top[i][1] or (top[i][0] <= snils <= 310):
                 in_top = True
                 break
             if top[i][2] == 1:
