@@ -6,4 +6,5 @@ from wtforms.validators import DataRequired
 class Form(FlaskForm):
     vuz = StringField('ВУЗ', validators=[DataRequired()])
     nup = StringField('Направление', validators=[DataRequired()])
+    snils = StringField('Твой СНИЛС или балл', validators=[DataRequired()])
     submit = SubmitField('Подготовить')

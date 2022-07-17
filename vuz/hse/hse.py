@@ -38,6 +38,8 @@ def get_hse(name):
                         forma = "С"
                     else:
                         forma = u[-6]
+                        if "Б" in forma and "К" in forma:
+                            forma = "Б, К"
                     vybor = u[-5]
                     sogl = u[-4]
                     if ball > 245:

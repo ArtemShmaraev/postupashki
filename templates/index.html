@@ -44,27 +44,33 @@
         <!-- END TIMER -->
         <div class="col-lg-4 col-lg-offset-4 mt centered">
 
-            <h4>ВСЕ ПРОСТО</h4><br>
-            <form action="" method="post">
+            <h4 data-animated="GoIn">ВСЕ ПРОСТО</h4><br>
+            <form data-animated="GoIn" action="" method="post">
                 {{ form.hidden_tag() }}
                 <p>
-                <h4>{{ form.vuz.label }}</h4>
+                <h4 data-animated="GoIn">{{ form.vuz.label }}</h4>
                     {{ form.vuz(class="form-control") }}<br>
                     {% for error in form.nup.errors %}
                 <div class="alert alert-danger" role="alert">
                     {{ error }}
                 </div>
                 {% endfor %}
-                <p>
-                <h4>{{ form.nup.label }}</h4>
+                <h4 data-animated="GoIn">{{ form.nup.label }}</h4>
                     {{ form.nup(class="form-control") }}<br>
                     {% for error in form.nup.errors %}
                 <div class="alert alert-danger" role="alert">
                     {{ error }}
                 </div>
                 {% endfor %}
+                <h4 data-animated="GoIn">{{ form.snils.label }}</h4>
+                    {{ form.snils(class="form-control") }}<br>
+                    {% for error in form.snils.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+                {% endfor %}
                 </p>
-                <p><h4>{{ form.submit(type="submit", class="btn btn-success") }}</h4></p>
+                <p><h4 data-animated="GoIn">{{ form.submit(type="submit", class="btn btn-success") }}</h4></p>
                 <div>{{ message }}</div></form>
 
         </div>

@@ -6,6 +6,7 @@ from datetime import datetime as dt
 from flask import Flask, render_template
 from data.form import Form
 from flask_ngrok import run_with_ngrok
+import re
 
 from vuz.mirea.mirea import get_mirea
 from vuz.hse.hse import get_hse
@@ -19,9 +20,8 @@ from vuz.bauman.bauman import get_bauman
 # запуск приложения
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+#run_with_ngrok(app)
 
-
-run_with_ngrok(app)
 
 def main():
     # in_BD(get_mirea())
@@ -31,13 +31,12 @@ def main():
     # in_BD(get_hse("hse_p"))
     # in_BD(get_itmo())
     # in_BD(get_leti())
-    in_BD(get_spbgu())
-    in_BD(get_guap())
-    in_BD(get_mtusi())
-    in_BD(get_bauman())
+    # in_BD(get_spbgu())
+    # in_BD(get_guap())
+    # in_BD(get_mtusi())
+    # in_BD(get_bauman())
     print("Все базы загружены, выберите вуз и направление: ")
     app.run()
-
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -45,7 +44,9 @@ def index():
     form = Form()
     if form.validate_on_submit():
         vuz = form.vuz.data
-        nupravlenie = form.nup.data.replace(".", "")
+        nupravlen = form.nup.data
+        nupravlenie = nupravlen.replace(".", "")
+        snils = int("".join(re.findall(r'\d+', form.snils.data)))
         db_sess = db_session.create_session()
         name = f"{vuz}_{nupravlenie}_sp{str(dt.now())[20:26]}"
         workbook = xlsxwriter.Workbook(f'static/{name}.xlsx')
@@ -56,25 +57,61 @@ def index():
         worksheet.write(0, 3, "Аттестат")
         worksheet.write(0, 4, "Подал")
         row = 1
+        top = []
+        k = 0
         for user in db_sess.query(User).all():
             if f"{vuz} | {nupravlenie} | Б".lower() in user.podal.lower():
+                k += 1
                 worksheet.write(row, 0, str(user.snils))
                 s = user.podal.split("$")
                 for i in range(len(s)):
                     t = s[i].split("|")
                     if t[0].lower().strip() == vuz.lower().strip() and t[1].lower().strip() == nupravlenie.lower().strip():
                         worksheet.write(row, 1, int(t[3]))
+                        ball = int(t[3])
                 worksheet.write(row, 2, "\n".join(user.sogl.split("$")))
                 s_vybor = set()
-                t = user.vybor.split("$")
-                for i in range(len(t)):
-                    s_vybor.add(t[i].split("|")[0])
+                t_v = user.vybor.split("$")
+                for i in range(len(t_v)):
+                    s_vybor.add(t_v[i].split("|")[0])
                 s_vybor = "\n".join(list(s_vybor))
                 worksheet.write(row, 3, s_vybor)
                 worksheet.write(row, 4, "\n".join(user.podal.split("$")))
+
+                f = 0
+                if f"{vuz} | {nupravlenie} | Б".lower() in user.sogl.lower():
+                    f = 1
+                elif len(user.sogl) > 1:
+                    f = 2
+
+                top.append([ball, user.snils, f, k])
                 row += 1
         workbook.close()
-        return render_template(f"post.html", f=f"{name}.xlsx")
+
+        top.sort(key=lambda x: (-x[0], x[-1]))
+        mesto = 1
+        mesto_sogl = 1
+        mesto_t = 1
+        in_top = False
+        for i in range(len(top)):
+            if snils == top[i][1] or snils == top[i][0]:
+                in_top = True
+                break
+            if top[i][2] == 1:
+                mesto_sogl += 1
+                mesto += 1
+                mesto_t += 1
+            elif top[i][2] == 2:
+                mesto += 1
+            else:
+                mesto += 1
+                mesto_t += 1
+
+        if not in_top:
+            mesto = 0
+            mesto_sogl = 0
+            mesto_t = 0
+        return render_template(f"post.html", f=f"{name}.xlsx", m1=mesto, m2=mesto_t, m3=mesto_sogl, vuz=vuz, nup=nupravlen)
 
     return render_template("index.html", form=form)
 
