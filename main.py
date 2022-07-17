@@ -24,17 +24,17 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
 def main():
-    # in_BD(get_mirea())
-    # in_BD(get_hse("hse"))
-    # in_BD(get_hse("hse_spb"))
-    # in_BD(get_hse("hse_nn"))
-    # in_BD(get_hse("hse_p"))
-    # in_BD(get_itmo())
-    # in_BD(get_leti())
-    # in_BD(get_spbgu())
-    # in_BD(get_guap())
-    # in_BD(get_mtusi())
-    # in_BD(get_bauman())
+    in_BD(get_mirea())
+    in_BD(get_hse("hse"))
+    in_BD(get_hse("hse_spb"))
+    in_BD(get_hse("hse_nn"))
+    in_BD(get_hse("hse_p"))
+    in_BD(get_itmo())
+    in_BD(get_leti())
+    in_BD(get_guap())
+    in_BD(get_mtusi())
+    in_BD(get_bauman())
+    in_BD(get_spbgu())
     print("Все базы загружены, выберите вуз и направление: ")
     app.run()
 
