@@ -2,6 +2,7 @@ from data import db_session
 from data.user import User
 import xlsxwriter
 from inBD import in_BD
+from outBD import out_BD
 from datetime import datetime as dt
 from flask import Flask, render_template
 from data.form import Form
@@ -35,6 +36,7 @@ def main():
     # in_BD(get_mtusi())
     # in_BD(get_bauman())
     # in_BD(get_spbgu())
+    out_BD("ВШЭ")
     print("Все базы загружены, выберите вуз и направление: ")
     app.run()
 
@@ -46,7 +48,8 @@ def index():
         vuz = form.vuz.data
         nupravlen = form.nup.data
         nupravlenie = nupravlen.replace(".", "")
-        snils = int("".join(re.findall(r'\d+', form.snils.data)))
+        snils = int("".join(re.findall(r'\d+', form.snils.data)))  # снилс или балл
+
         db_sess = db_session.create_session()
         name = f"{vuz}_{nupravlenie}_sp{str(dt.now())[20:26]}"
         workbook = xlsxwriter.Workbook(f'static/{name}.xlsx')
@@ -58,24 +61,27 @@ def index():
         worksheet.write(0, 4, "Подал")
         row = 1
         top = []
-        k = 0
         for user in db_sess.query(User).all():
             if f"{vuz} | {nupravlenie} | Б".lower() in user.podal.lower():
-                k += 1
                 worksheet.write(row, 0, str(user.snils))
+
                 s = user.podal.split("$")
                 for i in range(len(s)):
                     t = s[i].split("|")
-                    if t[0].lower().strip() == vuz.lower().strip() and t[1].lower().strip() == nupravlenie.lower().strip():
+                    if t[0].lower().strip() == vuz.lower().strip() and t[
+                        1].lower().strip() == nupravlenie.lower().strip():
                         worksheet.write(row, 1, int(t[3]))
                         ball = int(t[3])
+                        if int(user.snils) == int(snils):
+                            snils = int(t[3])
+                        break
                 worksheet.write(row, 2, "\n".join(user.sogl.split("$")))
+
                 s_vybor = set()
                 t_v = user.vybor.split("$")
                 for i in range(len(t_v)):
                     s_vybor.add(t_v[i].split("|")[0])
-                s_vybor = "\n".join(list(s_vybor))
-                worksheet.write(row, 3, s_vybor)
+                worksheet.write(row, 3, "\n".join(list(s_vybor)))
                 worksheet.write(row, 4, "\n".join(user.podal.split("$")))
 
                 f = 0
@@ -83,18 +89,17 @@ def index():
                     f = 1
                 elif len(user.sogl) > 1:
                     f = 2
-
-                top.append([ball, user.snils, f, k])
+                top.append([ball, user.snils, f])
                 row += 1
         workbook.close()
 
-        top.sort(key=lambda x: (-x[0], x[-1]))
+        top.sort(reverse=True)
         mesto = 1
         mesto_sogl = 1
         mesto_t = 1
         in_top = False
         for i in range(len(top)):
-            if snils == top[i][1] or (top[i][0] <= snils <= 310):
+            if top[i][0] <= snils <= 310:
                 in_top = True
                 break
             if top[i][2] == 1:
@@ -106,12 +111,13 @@ def index():
             else:
                 mesto += 1
                 mesto_t += 1
-
         if not in_top:
             mesto = 0
             mesto_sogl = 0
             mesto_t = 0
-        return render_template(f"post.html", f=f"{name}.xlsx", m1=mesto, m2=mesto_t, m3=mesto_sogl, vuz=vuz, nup=nupravlen)
+
+        return render_template(f"post.html", f=f"{name}.xlsx", m1=mesto, m2=mesto_t, m3=mesto_sogl, vuz=vuz,
+                               nup=nupravlen)
 
     return render_template("index.html", form=form)
 
