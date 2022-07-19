@@ -25,12 +25,13 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
 def main():
-    # out_BD("ВШЭ")
+    # out_BD("МИРЭА")
+    # out_BD("Бауманка")
     # in_BD(get_mirea())
-    in_BD(get_hse("hse"))
-    in_BD(get_hse("hse_spb"))
-    in_BD(get_hse("hse_nn"))
-    in_BD(get_hse("hse_p"))
+    # in_BD(get_hse("hse"))
+    # in_BD(get_hse("hse_spb"))
+    # in_BD(get_hse("hse_nn"))
+    # in_BD(get_hse("hse_p"))
     # in_BD(get_itmo())
     # in_BD(get_leti())
     # in_BD(get_guap())

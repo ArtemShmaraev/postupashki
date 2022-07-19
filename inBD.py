@@ -5,10 +5,12 @@ from data import db_session
 def in_BD(spisok):
     db_sess = db_session.create_session()
     for i in range(len(spisok)):
+        if i % 500 == 0:
+            print(i, len(spisok))
         snils = spisok[i][0]
         ball = spisok[i][1]
-        sogl = spisok[i][2].lower()
-        vybor = spisok[i][3].lower()
+        sogl = spisok[i][2].lower().strip()
+        vybor = spisok[i][3].lower().strip()
         nup = spisok[i][4]
         vuz = spisok[i][5]
         forma = spisok[i][6]
