@@ -25,18 +25,19 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
 def main():
-    in_BD(get_mirea())
+    # out_BD("ВШЭ")
+    # in_BD(get_mirea())
     in_BD(get_hse("hse"))
     in_BD(get_hse("hse_spb"))
     in_BD(get_hse("hse_nn"))
     in_BD(get_hse("hse_p"))
-    in_BD(get_itmo())
-    in_BD(get_leti())
-    in_BD(get_guap())
-    in_BD(get_mtusi())
-    in_BD(get_bauman())
-    in_BD(get_spbgu())
-    #out_BD("ВШЭ")
+    # in_BD(get_itmo())
+    # in_BD(get_leti())
+    # in_BD(get_guap())
+    # in_BD(get_mtusi())
+    # in_BD(get_bauman())
+    # in_BD(get_spbgu())
+
     print("Все базы загружены, выберите вуз и направление: ")
     app.run()
 
@@ -66,15 +67,15 @@ def index():
                 worksheet.write(row, 0, str(user.snils))
 
                 s = user.podal.split("$")
+                ball = 0
                 for i in range(len(s)):
                     t = s[i].split("|")
                     if t[0].lower().strip() == vuz.lower().strip() and t[
                         1].lower().strip() == nupravlenie.lower().strip():
-                        worksheet.write(row, 1, int(t[3]))
-                        ball = int(t[3])
-                        if int(user.snils) == int(snils):
-                            snils = int(t[3])
-                        break
+                        ball = max(ball, int(t[3]))
+                if int(snils) == int(user.snils):
+                    snils = ball
+                worksheet.write(row, 1, ball)
                 worksheet.write(row, 2, "\n".join(user.sogl.split("$")))
 
                 s_vybor = set()
@@ -98,7 +99,10 @@ def index():
         mesto_sogl = 1
         mesto_t = 1
         in_top = False
+        bvi = 0
         for i in range(len(top)):
+            if top[i][0] == 311:
+                bvi += 1
             if top[i][0] <= snils <= 310:
                 in_top = True
                 break
@@ -117,7 +121,7 @@ def index():
             mesto_t = 0
 
         return render_template(f"post.html", f=f"{name}.xlsx", m1=mesto, m2=mesto_t, m3=mesto_sogl, vuz=vuz,
-                               nup=nupravlen)
+                               nup=nupravlen, bvi=bvi)
 
     return render_template("index.html", form=form)
 

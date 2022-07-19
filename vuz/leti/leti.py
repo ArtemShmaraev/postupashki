@@ -64,7 +64,7 @@ def get_leti():
                 sogl = i.find("td", class_="is-agree").text
                 vybor = i.find("td", class_="is-original").text
                 forma = "K"
-                if ball > 245:
+                if ball > 245 or "Б" not in forma:
                     spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
         except Exception:
             print("Ошибка")

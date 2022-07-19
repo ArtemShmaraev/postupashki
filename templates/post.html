@@ -42,14 +42,16 @@
 
         <div class="col-lg-4 col-lg-offset-4 mt centered">
             <a href="{{ url_for('static', filename=f) }}" class="download"><h1 data-animated="GoIn"
-                    style="background: #11aa55; border-radius: 15px"><b>Скачать</b></h1></a>
+                                                                               style="background: #11aa55; border-radius: 15px">
+                <b>Скачать</b></h1></a>
 
 
         </div>
         <div style="width:100%; height:1px; clear:both;"></div>
-        <div id="line_block"><h1 data-animated="GoIn"><b>{{ m1 }}</b></h1><h4 data-animated="GoIn">место в общем конкурсе</h4></div>
-        <div id="line_block"><h1 data-animated="GoIn"><b>{{ m2 }}</b></h1><h4 data-animated="GoIn">место в общем конкурсе без абитуриентов подавших согласия в другой вуз</h4> </div>
-        <div id="line_block"><h1 data-animated="GoIn"><b>{{ m3 }}</b></h1><h4 data-animated="GoIn">место по согласиям</h4></div>
+        <div id="line_block"><h1 data-animated="GoIn"><b>{{ m1 }}</b></h1><h4>место в общем конкурсе</h4></div>
+        <div id="line_block"><h1 data-animated="GoIn"><b>{{ m2 }}</b></h1><h4>место в общем конкурсе без абитуриентов
+            подавших согласия в другой вуз</h4><h1 data-animated="GoIn"><b>{{ bvi }}</b></h1><h4>Количество БВИ</h4></div>
+        <div id="line_block"><h1 data-animated="GoIn"><b>{{ m3 }}</b></h1><h4>место по согласиям</h4></div>
         <div style="width:100%; height:1px; clear:both;"></div>
 
 

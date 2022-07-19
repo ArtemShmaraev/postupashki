@@ -61,7 +61,7 @@ def get_spbgu():
                         ball = int(row[4].text[:-3])
                         sogl = row[10].text
                         vybor = sogl  # нет столбца аттестат
-                        if ball > 245:
+                        if ball > 245 or "Б" not in forma:
                             spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
                         else:
                             break

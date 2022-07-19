@@ -38,7 +38,7 @@ def get_bauman():
                 forma = "БВИ"
             sogl = row[-2]
             vybor = row[-3]
-            if ball > 245:
+            if ball > 245 or "Б" not in forma:
                 spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
     return spisok
 

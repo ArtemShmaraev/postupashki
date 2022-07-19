@@ -23,7 +23,7 @@ def get_mtusi():
             ball = int(row[8].text)
             sogl = row[11].text
             vybor = row[10].text
-            if ball > 245:
+            if ball > 245 or "Б" not in forma:
                 spisok.append([int(snils), ball, sogl, vybor, nup, vuz, "Б"])
             else:
                 break

@@ -23,7 +23,7 @@ def get_spisok(s, forma, nup):
             ball = st["total_scores"]
             if forma == "БВИ":
                 ball = 311
-            if ball > 245:
+            if ball > 245 or "Б" not in forma:
                 sp.append([int(snils), ball, sogl, vybor, nup, "ИТМО", forma])
     return sp
 
