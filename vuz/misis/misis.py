@@ -34,6 +34,10 @@ def get_misis():
                         forma = "Б"
                     elif "ОК" in t[-3]:
                         forma = "О"
+                    elif "ЦП" in t[-3]:
+                        forma = "Ц"
+                    else:
+                        forma = "Б"
 
                     sogl = "Нет"
                     vybor = "Нет"
