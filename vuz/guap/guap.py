@@ -47,7 +47,7 @@ def get_guap():
                         forma = formadict[alltd.index(j)]
                     sogl = tds[6].text
                     vybor = tds[7].text
-                    if ball > 245 or "Б" not in forma:
+                    if int(ball) > 245 or "Б" not in forma:
                         spisok.append([int(snils), int(ball), sogl, vybor, nup, vuz, forma])
 
     return spisok

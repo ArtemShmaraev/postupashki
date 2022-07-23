@@ -29,7 +29,7 @@ def get_bauman():
             if row[0] == "1" and len(sp) - j == int(sp[-1][0]):
                 forma = "Б"
             snils = int("".join(re.findall(r'\d+', row[1])))
-            if row[3][:2].isdigit():
+            if row[3][:3].isdigit():
                 ball = int("".join(re.findall(r'\d+', row[3])))
                 if forma == "БВИ":
                     forma = "Б"

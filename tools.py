@@ -14,4 +14,4 @@ def save_html(url, name):
 
     return html
 
-save_html("https://cabinet.spbu.ru/Lists/1k_EntryLists/list_0aa95bd2-8183-4273-a61f-88fdab9f9d16.html", "a")
+save_html("https://misis.ru/applicants/admission/progress/baccalaureate-and-specialties/list-of-applicants/list/?id=BAC-BUDJ-O-010304", "a")
