@@ -8,7 +8,7 @@ def tohtml(src, file):
         f.write(src)
 
 
-def get_leti():
+def get_leti(bt):
     url = 'https://abit.etu.ru/ru/postupayushhim/bakalavriat-i-specialitet/spiski-podavshih-zayavlenie/'
 
     req = requests.get(url)
@@ -48,7 +48,7 @@ def get_leti():
                 ball = 311
             if f1 == "К":
                 forma = "К"
-            if ball > 245:
+            if ball > bt:
                 spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
         try:
             href = "https://abit.etu.ru/" + item.find_all("a")[1].get("href")
@@ -64,7 +64,7 @@ def get_leti():
                 sogl = i.find("td", class_="is-agree").text
                 vybor = i.find("td", class_="is-original").text
                 forma = "K"
-                if ball > 245 or "Б" not in forma:
+                if ball > bt or "Б" not in forma:
                     spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
         except Exception:
             print("Ошибка")

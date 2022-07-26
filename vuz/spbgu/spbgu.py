@@ -4,7 +4,7 @@ import requests
 import urllib.request
 
 
-def get_spbgu():
+def get_spbgu(bt):
     vuz = "СПБГУ"
     spisok = []
     url = "https://cabinet.spbu.ru/Lists/1k_EntryLists/index_comp_groups.html"
@@ -45,7 +45,7 @@ def get_spbgu():
                     ball = int(row[3].text[:-3])
                     sogl = row[9].text
                     vybor = sogl  # нет столбца аттестат
-                    if ball > 245:
+                    if ball > bt:
                         spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
                     else:
                         break
@@ -61,7 +61,7 @@ def get_spbgu():
                         ball = int(row[4].text[:-3])
                         sogl = row[10].text
                         vybor = sogl  # нет столбца аттестат
-                        if ball > 245 or "Б" not in forma:
+                        if ball > bt or "Б" not in forma:
                             spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
                         else:
                             break

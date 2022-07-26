@@ -16,7 +16,7 @@ from vuz.itmo.itmo import get_itmo
 from vuz.mtusi.mtusi import get_mtusi
 from vuz.spbgu.spbgu import get_spbgu
 from vuz.guap.guap import get_guap
-from vuz.bauman.bauman import get_bauman
+from vuz.admlist import get_admlist
 from vuz.misis.misis import get_misis
 
 # запуск приложения
@@ -26,21 +26,19 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
 def main():
-    # out_BD("МИРЭА")
-    #out_BD("Бауманка")
-    # in_BD(get_mirea())
-    # in_BD(get_hse("hse"))
-    # in_BD(get_hse("hse_spb"))
-    # in_BD(get_hse("hse_nn"))
-    # in_BD(get_hse("hse_p"))
-    # in_BD(get_itmo())
-    # in_BD(get_leti())
-    # in_BD(get_guap())
-    # in_BD(get_mtusi())
-    #in_BD(get_bauman())
-    # in_BD(get_spbgu())
-    out_BD("МИСИС")
-    in_BD(get_misis())
+    ball = 272
+    # in_BD(get_mirea(ball))
+    # in_BD(get_hse("hse", ball))
+    # in_BD(get_hse("hse_spb", ball))
+    # in_BD(get_hse("hse_nn", ball))
+    # in_BD(get_hse("hse_p", ball))
+    # in_BD(get_itmo(ball))
+    # in_BD(get_leti(ball))
+    # in_BD(get_guap(ball))
+    # in_BD(get_mtusi(ball))
+    in_BD(get_admlist(ball))
+    in_BD(get_spbgu(ball))
+    in_BD(get_misis(ball))
 
     print("Все базы загружены, выберите вуз и направление: ")
     app.run()

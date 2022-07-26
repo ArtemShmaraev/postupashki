@@ -3,9 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 
 
-
-
-def get_misis():
+def get_misis(bt):
     url = ["https://misis.ru/applicants/admission/progress/baccalaureate-and-specialties/list-of-applicants/list/?id=BAC-BUDJ-O-010304",
            "https://misis.ru/applicants/admission/progress/baccalaureate-and-specialties/list-of-applicants/list/?id=BAC-BUDJ-O-090300",
            "https://misis.ru/applicants/admission/progress/baccalaureate-and-specialties/list-of-applicants/list/?id=BAC-CELEV-O-010304",
@@ -38,12 +36,12 @@ def get_misis():
                         forma = "Ц"
                     else:
                         forma = "Б"
-
                     sogl = "Нет"
                     vybor = "Нет"
                     if t[-5].text == "+":
                         sogl = "Да"
                     if t[-4].text == "+":
                         vybor = "Да"
-                    spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
+                    if ball > bt:
+                        spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
     return spisok

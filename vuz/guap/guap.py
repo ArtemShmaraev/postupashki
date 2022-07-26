@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 
-def get_guap():
+def get_guap(bt):
     mainurl = "https://priem.guap.ru/_lists/Pred_37"
     req = requests.get(mainurl)
     src = req.text
@@ -47,7 +47,7 @@ def get_guap():
                         forma = formadict[alltd.index(j)]
                     sogl = tds[6].text
                     vybor = tds[7].text
-                    if int(ball) > 245 or "Б" not in forma:
+                    if int(ball) > bt or "Б" not in forma:
                         spisok.append([int(snils), int(ball), sogl, vybor, nup, vuz, forma])
 
     return spisok

@@ -5,7 +5,7 @@ import requests
 
 
 
-def get_mirea():
+def get_mirea(bt):
     spisok = []
     vuz = "МИРЭА"
     html = open("vuz/mirea/mirea.html", encoding="utf-8").read()
@@ -51,7 +51,7 @@ def get_mirea():
                 ball = int(table[i].find("td", class_="sum").text) + int(table[i].find("td", class_="achievments").text)
             sogl = table[i].find("td", class_="accepted").text
             vybor = table[i].find("td", class_="original").text
-            if ball > 245:
+            if ball > bt:
                 spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
             else:
                 break

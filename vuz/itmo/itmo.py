@@ -4,7 +4,7 @@ import requests
 import json
 
 
-def get_spisok(s, forma, nup):
+def get_spisok(s, forma, nup, bt):
     sp = []
     for g in range(len(s)):
         st = s[g]
@@ -23,12 +23,12 @@ def get_spisok(s, forma, nup):
             ball = st["total_scores"]
             if forma == "БВИ":
                 ball = 311
-            if ball > 245 or "Б" not in forma:
+            if ball > bt or "Б" not in forma:
                 sp.append([int(snils), ball, sogl, vybor, nup, "ИТМО", forma])
     return sp
 
 
-def get_itmo():
+def get_itmo(bt):
     spisok = []
     vuz = "ИТМО"
     html = open("vuz/itmo/itmo.html", encoding="utf-8").read()
@@ -40,14 +40,14 @@ def get_itmo():
         js = json.loads(requests.get(url).text)
         nup = "".join(re.findall(r'\d+', js["result"]['direction']['direction_title']))
         print(vuz, nup)
-        spisok.extend(get_spisok(js["result"]['without_entry_tests'], "БВИ", nup))
-        spisok.extend(get_spisok(js["result"]["by_unusual_quota"], "О", nup))
-        spisok.extend(get_spisok(js["result"]["by_special_quota"], "С", nup))
-        spisok.extend(get_spisok(js["result"]["by_target_quota"], "Ц", nup))
-        spisok.extend(get_spisok(js["result"]["general_competition"], "Б", nup))
+        spisok.extend(get_spisok(js["result"]['without_entry_tests'], "БВИ", nup, bt))
+        spisok.extend(get_spisok(js["result"]["by_unusual_quota"], "О", nup, bt))
+        spisok.extend(get_spisok(js["result"]["by_special_quota"], "С", nup, bt))
+        spisok.extend(get_spisok(js["result"]["by_target_quota"], "Ц", nup, bt))
+        spisok.extend(get_spisok(js["result"]["general_competition"], "Б", nup, bt))
 
         url = f"https://abitlk.itmo.ru/api/v1/9e2eee80b266b31c8d65f1dd3992fa26eb8b4c118ca9633550889a8ff2cac429/rating/bachelor/contract?program_id={s[3]}"
         js = json.loads(requests.get(url).text)
-        spisok.extend(get_spisok(js["result"]["items"], "K", nup))
+        spisok.extend(get_spisok(js["result"]["items"], "K", nup, bt))
     return spisok
 

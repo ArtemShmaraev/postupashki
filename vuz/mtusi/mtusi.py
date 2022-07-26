@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 
 
-def get_mtusi():
+def get_mtusi(bt):
     vuz = "МТУСИ"
     spisok = []
     url = "https://lk.abitur.mtuci.ru/staticPage.php?page_name=spiski"
@@ -23,7 +23,7 @@ def get_mtusi():
             ball = int(row[8].text)
             sogl = row[11].text
             vybor = row[10].text
-            if ball > 245:
+            if ball > bt:
                 spisok.append([int(snils), ball, sogl, vybor, nup, vuz, "Б"])
             else:
                 break

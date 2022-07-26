@@ -4,7 +4,7 @@ import openpyxl
 import re
 
 
-def get_hse(name):
+def get_hse(name, bt):
     spisok = []
     d = {"hse": "ВШЭ", "hse_spb": "ВШЭ СПБ", "hse_nn": "ВШЭ НН", "hse_p": "ВШЭ П"}
     vuz = d[name]
@@ -46,7 +46,7 @@ def get_hse(name):
                             forma = "Б, К"
                     vybor = u[-5]
                     sogl = u[-4]
-                    if ball > 245 or "Б" not in forma:
+                    if ball > bt or "Б" not in forma:
                         spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
                     else:
                         break
