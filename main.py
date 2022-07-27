@@ -26,20 +26,20 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
 def main():
-    ball = 272
-    out_BD("МИРЭА")
-    in_BD(get_mirea(ball))
-    # in_BD(get_hse("hse", ball))
-    # in_BD(get_hse("hse_spb", ball))
-    # in_BD(get_hse("hse_nn", ball))
-    # in_BD(get_hse("hse_p", ball))
-    # in_BD(get_itmo(ball))
-    # in_BD(get_leti(ball))
-    in_BD(get_guap(ball))
-    # in_BD(get_mtusi(ball))
-    # in_BD(get_admlist(ball))
-    # in_BD(get_spbgu(ball))
-    # in_BD(get_misis(ball))
+    ball = 291
+    out_BD("ВШЭ")
+    # in_BD(get_mirea(ball))
+    in_BD(get_hse("hse", ball))
+    in_BD(get_hse("hse_spb", ball))
+    in_BD(get_hse("hse_nn", ball))
+    in_BD(get_hse("hse_p", ball))
+    # # in_BD(get_itmo(ball))
+    # # in_BD(get_leti(ball))
+    # in_BD(get_guap(ball))
+    # # in_BD(get_mtusi(ball))
+    # # in_BD(get_admlist(ball))
+    # # in_BD(get_spbgu(ball))
+    # # in_BD(get_misis(ball))
 
     print("Все базы загружены, выберите вуз и направление: ")
     app.run()
