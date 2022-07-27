@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-import re
+
 
 def get_guap(bt):
     mainurl = "https://priem.guap.ru/_lists/Pred_37"
@@ -25,29 +25,24 @@ def get_guap(bt):
 
             a = j.text
             if a != '' and a != '-' and a[0] != '0':
-                href = "https://priem.guap.ru" + j.find("a").get("href")
+                href = "https://priem.guap.ru/_lists/" + j.find("a").get("href")
 
                 req1 = requests.get(href)
                 src1 = req1.text
                 soup1 = BeautifulSoup(src1, "lxml")
-                table = soup1.find("table", class_="table table-hover")
+                table = soup1.find("table", class_="table table-hover pk-ratings-table")
                 alltr = table.find("tbody").find_all("tr")
 
                 for tr in alltr:
                     tds = tr.find_all("td")
-                    snils = int("".join(re.findall(r'\d+', tds[0].text)))
+                    snils = tds[0].text.replace('-', '').replace(' ', '')
                     ball = tds[4].text
-                    if ball == "Без В/И":
-                        ball = 311
-                    p = tds[5].text
-                    if p == 'Да':
+                    forma = formadict[alltd.index(j)]
+                    if ball == 'Без В/И':
                         forma = 'БВИ'
-                        ball = 311
-                    else:
-                        forma = formadict[alltd.index(j)]
+                        ball = '311'
                     sogl = tds[6].text
                     vybor = tds[7].text
-                    if int(ball) > bt or "Б" not in forma:
-                        spisok.append([int(snils), int(ball), sogl, vybor, nup, vuz, forma])
-
+                    if int(ball) > bt:
+                        spisok.append([snils, int(ball), sogl, vybor, nup, vuz, forma])
     return spisok

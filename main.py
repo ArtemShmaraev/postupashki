@@ -27,18 +27,19 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 def main():
     ball = 272
-    # in_BD(get_mirea(ball))
+    out_BD("МИРЭА")
+    in_BD(get_mirea(ball))
     # in_BD(get_hse("hse", ball))
     # in_BD(get_hse("hse_spb", ball))
     # in_BD(get_hse("hse_nn", ball))
     # in_BD(get_hse("hse_p", ball))
     # in_BD(get_itmo(ball))
     # in_BD(get_leti(ball))
-    # in_BD(get_guap(ball))
+    in_BD(get_guap(ball))
     # in_BD(get_mtusi(ball))
-    in_BD(get_admlist(ball))
-    in_BD(get_spbgu(ball))
-    in_BD(get_misis(ball))
+    # in_BD(get_admlist(ball))
+    # in_BD(get_spbgu(ball))
+    # in_BD(get_misis(ball))
 
     print("Все базы загружены, выберите вуз и направление: ")
     app.run()
@@ -90,8 +91,10 @@ def index():
                 f = 0
                 if f"{vuz} | {nupravlenie} | Б".lower() in user.sogl.lower():
                     f = 1
+                    worksheet.write(row, 5, 1)
                 elif len(user.sogl) > 1:
                     f = 2
+                    worksheet.write(row, 6, 1)
                 top.append([ball, user.snils, f])
                 row += 1
         workbook.close()

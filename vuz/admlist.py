@@ -56,10 +56,9 @@ def get_admlist(bt):
                                 ball = 311
                             else:
                                 forma = "Б"
-                            if ball > bt or "Б" not in forma:
+
+                            if ball > bt:
                                 spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
-                            else:
-                                break
                 except Exception:
                     print('1')
 
