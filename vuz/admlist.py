@@ -49,8 +49,8 @@ def get_admlist(bt):
                                 forma = "О"
                             elif "Ц" in n:
                                 forma = "Ц"
-                            elif "К" in n:
-                                forma = "К"
+                            elif n.count("K") == 2:
+                                forma = "K"
                             elif "БВИ" in n:
                                 forma = "БВИ"
                                 ball = 311

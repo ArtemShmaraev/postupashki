@@ -42,17 +42,16 @@ def get_hse(name, bt):
             worksheet = wookbook.active
             do = worksheet.max_row + 1
             if forma == "БВИ":
-                for y in range(38, do):
+                for y in range(19, do):
                     u = []
                     for x in range(1, worksheet.max_column):
                         c = worksheet.cell(row=y, column=x).value
                         if c is not None:
                             u.append(c)
-                    if len(u) > 8:
-                        snils = int("".join(re.findall(r'\d+', u[1])))
-                        vybor = u[3]
-                        sogl = u[2]
-                        spisok.append([int(snils), 311, sogl, vybor, nup, vuz, forma])
+                    snils = int("".join(re.findall(r'\d+', u[1])))
+                    vybor = u[3]
+                    sogl = u[2]
+                    spisok.append([int(snils), 311, sogl, vybor, nup, vuz, forma])
 
             else:
                 for y in range(38, do):
@@ -61,16 +60,14 @@ def get_hse(name, bt):
                         c = worksheet.cell(row=y, column=x).value
                         if c is not None:
                             u.append(c)
-                    if len(u) > 10:
+                    if len(u) > 9:
                         try:
                             snils = int("".join(re.findall(r'\d+', u[1])))
                             ball = int(u[-2])
                             vybor = u[3]
                             sogl = u[2]
-                            if ball > bt or "Б" not in forma:
+                            if ball > bt:
                                 spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
-                            else:
-                                break
                         except Exception:
                             print("Ошибка")
 

@@ -27,19 +27,18 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 def main():
     ball = 291
-    out_BD("ВШЭ")
     # in_BD(get_mirea(ball))
-    in_BD(get_hse("hse", ball))
-    in_BD(get_hse("hse_spb", ball))
-    in_BD(get_hse("hse_nn", ball))
-    in_BD(get_hse("hse_p", ball))
-    # # in_BD(get_itmo(ball))
-    # # in_BD(get_leti(ball))
+    # in_BD(get_hse("hse", ball))
+    # in_BD(get_hse("hse_spb", ball))
+    # in_BD(get_hse("hse_nn", ball))
+    # in_BD(get_hse("hse_p", ball))
+    # in_BD(get_itmo(ball))
+    # in_BD(get_leti(ball))
     # in_BD(get_guap(ball))
-    # # in_BD(get_mtusi(ball))
-    # # in_BD(get_admlist(ball))
-    # # in_BD(get_spbgu(ball))
-    # # in_BD(get_misis(ball))
+    # in_BD(get_mtusi(ball))
+    # in_BD(get_admlist(ball))
+    # in_BD(get_spbgu(ball))
+    # in_BD(get_misis(ball))
 
     print("Все базы загружены, выберите вуз и направление: ")
     app.run()
@@ -50,8 +49,7 @@ def index():
     form = Form()
     if form.validate_on_submit():
         vuz = form.vuz.data
-        nupravlen = form.nup.data
-        nupravlenie = nupravlen.replace(".", "")
+        nupravlenie = form.nup.data
         snils = int("".join(re.findall(r'\d+', form.snils.data)))  # снилс или балл
 
         db_sess = db_session.create_session()
@@ -126,7 +124,7 @@ def index():
             mesto_t = 0
 
         return render_template(f"post.html", f=f"{name}.xlsx", m1=mesto, m2=mesto_t, m3=mesto_sogl, vuz=vuz,
-                               nup=nupravlen, bvi=bvi)
+                               nup=nupravlenie, bvi=bvi)
 
     return render_template("index.html", form=form)
 
