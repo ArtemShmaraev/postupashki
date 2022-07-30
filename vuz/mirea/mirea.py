@@ -44,16 +44,17 @@ def get_mirea(bt):
         # поиск таблицы, срез для того чтобы убрать первую строку
         table = soup.find("table").findAll("tr")[1:]
         for i in range(len(table)):
-            snils = int("".join(re.findall(r'\d+', table[i].find("td", class_="fio").text)))
-            if forma == "БВИ":
-                ball = 311
-            else:
-                ball = int(table[i].find("td", class_="sum").text) + int(table[i].find("td", class_="achievments").text)
-            sogl = table[i].find("td", class_="accepted").text
-            vybor = table[i].find("td", class_="original").text
-            if ball > bt:
-                spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
-            else:
-                break
+            if table[i]:
+                snils = int("".join(re.findall(r'\d+', table[i].find("td", class_="fio").text)))
+                if forma == "БВИ":
+                    ball = 311
+                else:
+                    ball = int(table[i].find("td", class_="sum").text) + int(table[i].find("td", class_="achievments").text)
+                sogl = table[i].find("td", class_="accepted").text
+                vybor = table[i].find("td", class_="original").text
+                if ball > bt:
+                    spisok.append([int(snils), ball, sogl, vybor, nup, vuz, forma])
+                else:
+                    break
 
     return spisok
